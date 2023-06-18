@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSAT Form</title>
+</head>
+<body>
+   <h1 id="ticketIdLabel">Customer Satisfaction Survey - Ticket ID: <span id="ticketId"></span></h1>
+    <form id="csatForm" onsubmit="launchChatbot(); return false;">
+        <h2>1. Overall Satisfaction</h2>
+        <label for="overallSatisfaction">On a scale of 1 to 10, how satisfied are you with our product/service?</label>
+        <input type="number" id="overallSatisfaction" name="overallSatisfaction" min="1" max="10" required>
+
+        <label for="overallExperience">How would you rate your overall experience with our company?</label>
+        <input type="number" id="overallExperience" name="overallExperience" min="1" max="10" required>
+
+        <h2>2. Product/Service Quality</h2>
+        <label for="productQuality">How would you rate the quality of our product/service?</label>
+        <input type="number" id="productQuality" name="productQuality" min="1" max="10" required>
+
+        <label for="meetExpectations">Did our product/service meet your expectations?</label>
+        <select id="meetExpectations" name="meetExpectations" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <h2>3. Customer Support</h2>
+        <label for="customerSupport">How satisfied are you with the assistance provided by our customer support team?</label>
+        <input type="number" id="customerSupport" name="customerSupport" min="1" max="10" required>
+
+        <label for="timelyManner">Were your inquiries or concerns addressed in a timely manner?</label>
+        <select id="timelyManner" name="timelyManner" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <h2>4. Ease of Use</h2>
+        <label for="easeOfUse">How easy was it to navigate and use our product/service?</label>
+        <input type="number" id="easeOfUse" name="easeOfUse" min="1" max="10" required>
+
+        <label for="difficulties">Did you encounter any difficulties while using our product/service?</label>
+        <select id="difficulties" name="difficulties" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <h2>5. Value for Money</h2>
+        <label for="valueForMoney">Do you believe our product/service provides value for the price paid?</label>
+        <select id="valueForMoney" name="valueForMoney" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label for="reasonablyPriced">Would you consider our product/service to be reasonably priced?</label>
+        <select id="reasonablyPriced" name="reasonablyPriced" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <h2>6. Likelihood to Recommend</h2>
+        <label for="likelihoodRecommend">How likely are you to recommend our product/service to others?</label>
+        <input type="number" id="likelihoodRecommend" name="likelihoodRecommend" min="1" max="10" required>
+
+        <label for="referCompany">Would you refer our company to friends or colleagues?</label>
+        <select id="referCompany" name="referCompany" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <h2>7. Purchase Experience</h2>
+        <label for="purchaseExperience">How was your experience during the purchase process?</label>
+        <input type="text" id="purchaseExperience" name="purchaseExperience" required>
+
+        <label for="orderProcess">Did you find the ordering and payment process straightforward?</label>
+        <select id="orderProcess" name="orderProcess" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <h2>8. Delivery and Timeliness</h2>
+        <label for="deliveryTimeliness">Did you receive your order within the promised timeframe?</label>
+        <select id="deliveryTimeliness" name="deliveryTimeliness" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label for="satisfiedDelivery">Were you satisfied with the delivery process?</label>
+        <select id="satisfiedDelivery" name="satisfiedDelivery" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <h2>9. Problem Resolution</h2>
+        <label for="problemResolution">If you encountered any issues, how satisfied were you with the way they were resolved?</label>
+        <input type="number" id="problemResolution" name="problemResolution" min="1" max="10" required>
+
+        <label for="concernsSatisfaction">Were your concerns addressed to your satisfaction?</label>
+        <select id="concernsSatisfaction" name="concernsSatisfaction" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <h2>10. Additional Feedback</h2>
+        <label for="likedAspects">Is there anything specific you liked about our product/service?</label>
+        <textarea id="likedAspects" name="likedAspects"></textarea>
+
+        <label for="improvementSuggestions">Do you have any suggestions for improving our product/service?</label>
+        <textarea id="improvementSuggestions" name="improvementSuggestions"></textarea>
+
+        <input type="submit" value="Submit">
+    </form>
+<script type="text/javascript">
+        function getParameterByName(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(window.location.href);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        function launchChatbot() {
+            // Retrieve the ticket ID from the URL query parameters
+            var ticketId = getParameterByName('ticketId');
+            var overallSatisfaction = document.getElementById("overallSatisfaction").value;
+            var overallExperience = document.getElementById("overallExperience").value;
+            var productQuality = document.getElementById("productQuality").value;
+            var meetExpectations = document.getElementById("meetExpectations").value;
+            var customerSupport = document.getElementById("customerSupport").value;
+            var timelyManner = document.getElementById("timelyManner").value;
+            var easeOfUse = document.getElementById("easeOfUse").value;
+            var difficulties = document.getElementById("difficulties").value;
+            var valueForMoney = document.getElementById("valueForMoney").value;
+            var reasonablyPriced = document.getElementById("reasonablyPriced").value;
+            var likelihoodRecommend = document.getElementById("likelihoodRecommend").value;
+            var referCompany = document.getElementById("referCompany").value;
+            var purchaseExperience = document.getElementById("purchaseExperience").value;
+            var orderProcess = document.getElementById("orderProcess").value;
+            var deliveryTimeliness = document.getElementById("deliveryTimeliness").value;
+            var satisfiedDelivery = document.getElementById("satisfiedDelivery").value;
+            var problemResolution = document.getElementById("problemResolution").value;
+            var concernsSatisfaction = document.getElementById("concernsSatisfaction").value;
+            var likedAspects = document.getElementById("likedAspects").value;
+            var improvementSuggestions = document.getElementById("improvementSuggestions").value;
+
+             window.ymConfig = {
+                "bot": "x1683541740113",
+                "host": "https://r3.cloud.yellow.ai",
+                "hideChatButton": "true",
+                triggerJourney: "store-csat_tpivjs",
+                "payload": {
+                    "overall_satisfaction": overallSatisfaction,
+                    "overall_experience": overallExperience,
+                    "product_quality": productQuality,
+                    "meet_expectations": meetExpectations,
+                    "customer_support": customerSupport,
+                    "timely_manner": timelyManner,
+                    "ease_of_use": easeOfUse,
+                    "difficulties": difficulties,
+                    "value_for_money": valueForMoney,
+                    "reasonably_priced": reasonablyPriced,
+                    "likelihood_recommend": likelihoodRecommend,
+                    "refer_company": referCompany,
+                    "purchase_experience": purchaseExperience,
+                    "order_process": orderProcess,
+                    "delivery_timeliness": deliveryTimeliness,
+                    "satisfied_delivery": satisfiedDelivery,
+                    "problem_resolution": problemResolution,
+                    "concerns_satisfaction": concernsSatisfaction,
+                    "liked_aspects": likedAspects,
+                    "improvement_suggestions": improvementSuggestions,
+                    "ticketId": ticketId
+                }
+            };
+
+            (function () {
+                var w = window,
+                    ic = w.YellowMessenger;
+                if ("function" === typeof ic)
+                    ic("reattach_activator"), ic("update", ymConfig);
+                else {
+                    var d = document,
+                        i = function () {
+                            i.c(arguments)
+                        };
+                    i.q = [], i.c = function (e) {
+                        i.q.push(e)
+                    }, w.YellowMessenger = i;
+                    var e = d.createElement("script");
+                    e.type = "text/javascript", e.async = !0, e.src = "https://cdn.yellowmessenger.com/plugin/widget-v2/latest/dist/main.min.js";
+                    var t = d.getElementsByTagName("script")[0];
+                    t.parentNode.insertBefore(e, t);
+                }
+            })();
+        }
+            var ticketIdElement = document.getElementById("ticketId");
+            ticketIdElement.textContent = getParameterByName("ticketId");
+        
+// <!--     <script type="text/javascript">
+//          function getParameterByName(name) {
+//             name = name.replace(/[\[\]]/g, '\\$&');
+//             var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+//                 results = regex.exec(window.location.href);
+//             if (!results) return null;
+//             if (!results[2]) return '';
+//             return decodeURIComponent(results[2].replace(/\+/g, ' '));
+//         }
+
+//         function launchChatbot() {
+//             // Retrieve the ticket ID from the URL query parameters
+//             var ticketId = getParameterByName('ticketId');
+//             var overallSatisfaction = document.getElementById("overallSatisfaction").value;
+//             var overallExperience = document.getElementById("overallExperience").value;
+//             var productQuality = document.getElementById("productQuality").value;
+//             var meetExpectations = document.getElementById("meetExpectations").value;
+//             var customerSupport = document.getElementById("customerSupport").value;
+//             var timelyManner = document.getElementById("timelyManner").value;
+//             var easeOfUse = document.getElementById("easeOfUse").value;
+//             var difficulties = document.getElementById("difficulties").value;
+//             var valueForMoney = document.getElementById("valueForMoney").value;
+//             var reasonablyPriced = document.getElementById("reasonablyPriced").value;
+//             var likelihoodRecommend = document.getElementById("likelihoodRecommend").value;
+//             var referCompany = document.getElementById("referCompany").value;
+//             var purchaseExperience = document.getElementById("purchaseExperience").value;
+//             var orderProcess = document.getElementById("orderProcess").value;
+//             var deliveryTimeliness = document.getElementById("deliveryTimeliness").value;
+//             var satisfiedDelivery = document.getElementById("satisfiedDelivery").value;
+//             var problemResolution = document.getElementById("problemResolution").value;
+//             var concernsSatisfaction = document.getElementById("concernsSatisfaction").value;
+//             var likedAspects = document.getElementById("likedAspects").value;
+//             var improvementSuggestions = document.getElementById("improvementSuggestions").value;
+
+//             window.ymConfig = {
+//                 "bot": "x1683541740113",
+//                 "host": "https://r3.cloud.yellow.ai",
+//                 "hideChatButton": "true",
+//                 triggerJourney: "store-csat_tpivjs",
+//                 "payload": {
+//                     "overall_satisfaction": overallSatisfaction,
+//                     "overall_experience": overallExperience,
+//                     "product_quality": productQuality,
+//                     "meet_expectations": meetExpectations,
+//                     "customer_support": customerSupport,
+//                     "timely_manner": timelyManner,
+//                     "ease_of_use": easeOfUse,
+//                     "difficulties": difficulties,
+//                     "value_for_money": valueForMoney,
+//                     "reasonably_priced": reasonablyPriced,
+//                     "likelihood_recommend": likelihoodRecommend,
+//                     "refer_company": referCompany,
+//                     "purchase_experience": purchaseExperience,
+//                     "order_process": orderProcess,
+//                     "delivery_timeliness": deliveryTimeliness,
+//                     "satisfied_delivery": satisfiedDelivery,
+//                     "problem_resolution": problemResolution,
+//                     "concerns_satisfaction": concernsSatisfaction,
+//                     "liked_aspects": likedAspects,
+//                     "improvement_suggestions": improvementSuggestions,
+//                     "ticketId": ticketId
+//                 }
+//             };
+      
+//             (function () {
+//                 var w = window,
+//                     ic = w.YellowMessenger;
+//                 if ("function" === typeof ic)
+//                     ic("reattach_activator"), ic("update", ymConfig);
+//                 else {
+//                     var d = document,
+//                         i = function () {
+//                             i.c(arguments)
+//                         };
+//                     i.q = [], i.c = function (e) {
+//                         i.q.push(e)
+//                     }, w.YellowMessenger = i;
+//                     var e = d.createElement("script");
+//                     e.type = "text/javascript", e.async = !0, e.src = "https://cdn.yellowmessenger.com/plugin/widget-v2/latest/dist/main.min.js";
+//                     var t = d.getElementsByTagName("script")[0];
+//                     t.parentNode.insertBefore(e, t);
+//                 }
+//             })();
+//         } -->
+        window.addEventListener('message', function(eventData) {
+        eventData = JSON.parse(eventData.data)
+        console.log(eventData, "eventData"); //Check incoming eventData
+
+        // to handle successful CSAT Input
+        if(eventData.event_code == "message-received" && (eventData.data == "CSAT Sent")) {
+            alert("Your Rating has been sent Successfully, Thank you!");
+        }
+
+        // to handle failure CSAT input
+        if(eventData.event_code == "message-received" && (eventData.data == "Failure"))
+        alert("FAILURE!! Please try again!");
+
+         if(eventData.event_code == "message-received" && (eventData.data == "Already Filled CSAT")) {
+            alert("You Have Responded the CSAT for this ticket!!");
+        }
+    });
+    </script>
+</body>
+</html>
